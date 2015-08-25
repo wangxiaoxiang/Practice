@@ -53,27 +53,34 @@ private:
 
 Complex& Complex::operator ++ (void)
 {
-	++this->m_a
-	++this->m_b;
+	++m_a;
+	++m_b;
 	return *this;
 }
 
 Complex& Complex::operator -- (void)
 {
 	
-	--this->m_a
-	--this->m_b;
+	--m_a;
+	--m_b;
 	return *this;
 }
 
 Complex  Complex::operator ++ (int)
 {
-	return Complex(0.0f,0.0f);
+	Complex old = *this;
+	m_a++;
+	m_b++;
+	return old;
 }
 
 Complex  Complex::operator -- (int)
 {
-	return Complex(1.0f,1.0f);
+	
+	Complex old = *this;
+	m_a--;
+	m_b--;
+	return old;
 }
 
 const Complex Complex::operator + (const Complex& t) const 
@@ -122,7 +129,7 @@ ostream& operator << (ostream& os, const Complex& c)
 	return os;
 }
 
-void test_complex_a_b(const Complex& a,const Complex& b)
+void test_complex_a_b(Complex& a,Complex& b)
 {
 	
 	cout<<"a   |"<<a<<endl;
@@ -134,6 +141,11 @@ void test_complex_a_b(const Complex& a,const Complex& b)
 	cout<<"a*b |"<<a*b<<endl;
 	cout<<"a/b |"<<a/b<<endl;
 	cout<<"++a |"<<++a<<endl;
+	cout<<"--a |"<<--a<<endl;
+	cout<<"a++ |"<<a++<<endl;
+	cout<<"a-- |"<<a--<<endl;
+	cout<<"a   |"<<a<<endl;
+	cout<<"b   |"<<b<<endl;
 }
 
 void test_operator()
@@ -146,26 +158,7 @@ void test_operator()
 	cin>>a;
 	cin>>b;
 	test_complex_a_b(a,b);
-	/*
-	//Result
-	a   |m_a:1	m_b:1
-	b   |m_a:2	m_b:2
-	a+b |m_a:3	m_b:3
-	a-b |m_a:-1	m_b:-1
-	a*b |m_a:2	m_b:2
-	a/b |m_a:0.5	m_b:0.5
-	
-	3 4
-	5 6
-	a   |m_a:3	m_b:4
-	b   |m_a:5	m_b:6
-	a+b |m_a:8	m_b:10
-	a-b |m_a:-2	m_b:-2
-	a*b |m_a:15	m_b:24
-	a/b |m_a:0.6	m_b:0.666667
-	*/
 }
-
 int main(int argc,char** argv)
 {
 	test_operator();
