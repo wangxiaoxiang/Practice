@@ -13,7 +13,7 @@ public:
 	Staff(string name,int age,string no):m_name(name),m_age(age),m_no(no){};
 	~Staff()
 	{
-		cout<<"~Staff()"<<endl;
+	//	cout<<"~Staff()"<<endl;
 	}
 	//setter getter
 	void setName(string& name)
@@ -64,11 +64,11 @@ private:
 public:
 	SoftwareEngineer(string name,int age,string no,string computer):Staff(name,age,no),m_computer(computer)
 	{
-		cout<<"新来了一只猴。"<<endl;
+	//	cout<<"新来了一只猴。"<<endl;
 	};
 	~SoftwareEngineer()
 	{
-		cout<<"一只码字猴以身死亡。"<<endl;
+	//	cout<<"一只码字猴以身死亡。"<<endl;
 	}
 	void setComputer(string& computer)
 	{
@@ -103,11 +103,11 @@ private:
 public:
 	ProductManager(string name,int age,string no,int mood = 0):Staff(name,age,no),m_mood(mood)
 	{
-		cout<<"前方出现产品经理一只，码字猴们请小心！"<<endl;
+	//	cout<<"前方出现产品经理一只，码字猴们请小心！"<<endl;
 	};
 	~ProductManager()
 	{
-		cout<<"一只产品经理已经阵亡。"<<endl;
+	//	cout<<"一只产品经理已经阵亡。"<<endl;
 	}
 
 	void setMood(int mood)
@@ -145,7 +145,7 @@ public:
 
 int main(int argc, char** argv)
 {
-	Staff zh("zhang huan",20,"A1");
+	Staff* zh = new Staff("zhang huan",20,"A1");
 	SoftwareEngineer wxx("Xiaoxiang wang",25,"B1","Macbook pro 13\"");
 	ProductManager ny("Yang",24,"C1",-1);
 	
@@ -153,6 +153,15 @@ int main(int argc, char** argv)
 	Staff* staff_B1 = &wxx;
 	Staff* staff_C1 = &ny;
 
-	(*staff_B1).work();
-	(*staff_C1).work();
+	staff_B1->work();
+	staff_C1->work();
+	
+	//不安全的类型转换
+	//error:cannot initialize a variable of type 'SoftwareEngineer *' with an lvalue of type 'Staff *'
+	//SoftwareEngineer* p_zh = zh;
+
+	//使用静态造型（强制类型转换）虽然可以回避语法上限制，但是并不安全。
+	//SoftwareEngineer* p_zh = static_cast<SoftwareEngineer*>(zh);
+	//cout<<p_zh->name()<<endl;
+
 }
