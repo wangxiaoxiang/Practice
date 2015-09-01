@@ -40,14 +40,26 @@ public:
 
 class Staff:public Human
 {
+private:
+	string* m_no;
 public:
-	Staff(const string* name,const int* age):Human(name,age)
+	Staff(const string* name,const int* age,const string* no):Human(name,age)
 	{
+		string* _no = new string();
+		*_no = *no;
+		this->m_no = _no;
+		
 		cout<<"Staff() invoked"<<endl;
+	}
+	~Staff()
+	{
+		delete m_no;
+		cout<<"~Staff() invoked"<<endl;
 	}
 	const string description() const
 	{
 		string _description = Human::description();
+		_description += ("\nNO::"+*(this->m_no));
 		return _description;
 	}
 };
@@ -57,7 +69,7 @@ int main(int argc,char** argv)
 	string name = "GoTT";
 	string no = "NO.1";
 	int age = 25;
-	Staff* GoTT = new Staff(&name,&age);
+	Staff* GoTT = new Staff(&name,&age,&no);
 	cout<<GoTT->description()<<endl;
 	delete GoTT;
 	
