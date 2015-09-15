@@ -6,7 +6,7 @@ using namespace std;
 class Animal
 {
 public:
-  void howl() const
+  virtual void howl() const
   {
     cout<<"Animal howl……"<<endl;
   }
@@ -15,7 +15,7 @@ public:
 class Wofl:public Animal
 {
 public:
-  void howl() const
+  virtual void howl() const
   {
     cout<<"Wofl howl(wow wow),吓死宝宝了。"<<endl;
   }
@@ -24,7 +24,7 @@ public:
 class Cat:public Animal
 {
 public:
-  void howl() const
+  virtual void howl() const
   {
     cout<<"Cat howl(miao miao)"<<endl;
   }
@@ -42,9 +42,9 @@ int main(int argv,char** argc)
 
 
   AnimalHowl(wofl);
-  //output Animal howl……
+  //output Wofl howl(howl howl),吓死宝宝了。
 
   AnimalHowl(cat);
-  //output Animal howl……
+  //output Cat howl(miao miao)
   return 0;
 }
